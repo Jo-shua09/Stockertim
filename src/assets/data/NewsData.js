@@ -304,3 +304,51 @@ const NewsData = [
 ];
 
 export default NewsData;
+
+export const NewsTableData = [
+  {
+    image: news,
+    title: "Markets rally as inflation cools",
+    desc: "Stocks rose sharply today after new data showed inflation easing...",
+    day: "Today",
+    time: 2,
+    comments: 14,
+    author: "Reuters",
+  },
+  {
+    image: news,
+    title: "Tech CEOs testify in Congress",
+    desc: "Leaders from major tech companies face lawmakers in antitrust hearings...",
+    day: "Yesterday",
+    time: 22,
+    comments: 31,
+    author: "CNN",
+  },
+  {
+    image: news,
+    title: "Bitcoin hits $60k again",
+    desc: "The cryptocurrency continues its volatile ride as institutional interest returns...",
+    day: "Mon",
+    time: 8,
+    comments: 47,
+    author: "CoinDesk",
+  },
+  {
+    image: news,
+    title: "New AI model breaks records",
+    desc: "A new language model shows promise in benchmark tests...",
+    day: "Wed",
+    time: 18,
+    comments: 19,
+    author: "The Verge",
+  },
+  {
+    image: news,
+    title: "Elon Musk announces new Tesla",
+    desc: "Tesla unveils a new budget electric vehicle for 2026...",
+    day: "Fri",
+    time: 10,
+    comments: 64,
+    author: "Bloomberg",
+  },
+];

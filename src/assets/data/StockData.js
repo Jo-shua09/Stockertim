@@ -74,3 +74,42 @@ const StockData = [
 ];
 
 export default StockData;
+
+export const StockTableData = [
+  {
+    name: "Mini Active",
+    stocks: [
+      { name: "NVDA", last: "160.00", change: "+1.11%", value: "138.3M" },
+      { name: "TBLA", last: "309.61", change: "+1.32%", value: "103.3M" },
+      { name: "DDOD", last: "145.84", change: "+4.25%", value: "86.30M" },
+      { name: "PLTR", last: "139.71", change: "+0.42%", value: "59.83M" },
+      { name: "ANZH", last: "219.36", change: "-1.89%", value: "45.69M" },
+      { name: "AAFL", last: "230.01", change: "+0.93%", value: "43.95M" },
+      { name: "GOOGL", last: "174.56", change: "-1.37%", value: "40.44M" },
+    ],
+  },
+  {
+    name: "Gainers",
+    stocks: [
+      { name: "NVDA", last: "160.00", change: "+1.11%", value: "138.3M" },
+      { name: "TBLA", last: "309.61", change: "+1.32%", value: "103.3M" },
+      { name: "DDOD", last: "145.84", change: "+4.25%", value: "86.30M" },
+      { name: "PLTR", last: "139.71", change: "+0.42%", value: "59.83M" },
+      { name: "ANZH", last: "219.36", change: "-1.89%", value: "45.69M" },
+      { name: "AAFL", last: "230.01", change: "+0.93%", value: "43.95M" },
+      { name: "GOOGL", last: "174.56", change: "-1.37%", value: "40.44M" },
+    ],
+  },
+  {
+    name: "Losers",
+    stocks: [
+      { name: "NVDA", last: "160.00", change: "+1.11%", value: "138.3M" },
+      { name: "TBLA", last: "309.61", change: "+1.32%", value: "103.3M" },
+      { name: "DDOD", last: "145.84", change: "+4.25%", value: "86.30M" },
+      { name: "PLTR", last: "139.71", change: "+0.42%", value: "59.83M" },
+      { name: "ANZH", last: "219.36", change: "-1.89%", value: "45.69M" },
+      { name: "AAFL", last: "230.01", change: "+0.93%", value: "43.95M" },
+      { name: "GOOGL", last: "174.56", change: "-1.37%", value: "40.44M" },
+    ],
+  },
+];

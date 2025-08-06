@@ -8,6 +8,7 @@ export default {
       },
       backgroundImage: {
         "auth-frame": "url('./src/assets/images/auth-frame.png')",
+        ads: "url('./src/assets/images/ad-img.png')",
       },
     },
   },

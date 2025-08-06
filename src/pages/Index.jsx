@@ -6,6 +6,8 @@ import NewsBrief from "../components/sections/home/NewsBrief";
 import StockPicks from "../components/sections/home/StockPicks";
 import TradeAlerts from "../components/sections/home/TradeAlerts";
 import VideoBrief from "../components/sections/home/VideoBrief";
+import SideNews from "../components/ui/SideNews";
+import StockTable from "../components/ui/StockTable";
 
 export default function Index() {
   return (
@@ -23,7 +25,12 @@ export default function Index() {
         <ADSpace />
         <VideoBrief />
       </div>
-      <div className="xl:w-full xl:flex-1 h-full bg-white rounded-xl my-8 p-10 xl:block hidden"></div>
+      <div className="xl:w-full xl:flex-1 h-full bg-white rounded-xl my-8 p-10 xl:block hidden">
+        <StockTable />
+        <ADSpace className="w-full h-[35rem]" />
+        <SideNews />
+        <ADSpace className="w-full h-[35rem]" />
+      </div>
     </div>
   );
 }
