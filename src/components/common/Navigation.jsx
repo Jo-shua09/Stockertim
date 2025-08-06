@@ -15,16 +15,8 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsOverflow(window.innerWidth > 991);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
       setIsMobile(window.innerWidth > 768);
+      setIsOverflow(window.innerWidth > 991);
     };
 
     window.addEventListener("resize", handleResize);

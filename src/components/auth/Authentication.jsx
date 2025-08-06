@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import { BsEye } from "react-icons/bs";
-import { FaFacebook } from "react-icons/fa";
+import { FaCheck, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { TiTimes } from "react-icons/ti";
 import logo from "../../assets/images/logo.png";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BiMobile, BiTrendingUp } from "react-icons/bi";
+import { pricingPlans } from "../../assets/data/PricingPlans";
+import { ButtonOne } from "../ui/Button";
+import { IoMdClose } from "react-icons/io";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
 
 export default function Authentication({ onClose }) {
   const [isSignUp, setIsSignUp] = useState(true);
+  const [showPlanSelection, setShowPlanSelection] = useState(false);
   const [signupStep, setSignupStep] = useState(1);
   const [timeLeft, setTimeLeft] = useState(60);
   const [showResend, setShowResend] = useState(false);
+  // const [selectedPlan, setSelectedPlan] = useState(null);
 
   useEffect(() => {
     let timer;
@@ -46,11 +54,21 @@ export default function Authentication({ onClose }) {
   };
 
   const handleNextStep = () => {
-    setSignupStep((prev) => Math.min(prev + 1, 4));
+    if (signupStep === 1) {
+      setShowPlanSelection(true);
+    } else {
+      setSignupStep((prev) => Math.min(prev + 1, 4));
+    }
   };
 
-  // const handlePrevStep = () => {
-  //   setSignupStep((prev) => Math.max(prev - 1, 1));
+  const handlePlanSelect = () => {
+    // setSelectedPlan(plan);
+    setShowPlanSelection(false);
+    setSignupStep(2);
+  };
+
+  // const handleClosePlanSelection = () => {
+  //   setShowPlanSelection(false);
   // };
 
   return (
@@ -161,7 +179,7 @@ export default function Authentication({ onClose }) {
               <div className="h-full pb-16">
                 <div className="h-full ">
                   {/* Step 1: Account Creation */}
-                  {signupStep === 1 && (
+                  {signupStep === 1 && !showPlanSelection && (
                     <div className="space-y-10">
                       <h2 className="text-5xl font-bold mb-6">create free account</h2>
                       <div className="flex items-center border-[.25rem] hover:scale-95 cursor-pointer border-neutral-800 w-full px-32 py-4 gap-6 rounded-3xl text-center">
@@ -223,7 +241,7 @@ export default function Authentication({ onClose }) {
                   )}
 
                   {/* Step 2: Password Setup */}
-                  {signupStep === 2 && (
+                  {signupStep === 2 && !showPlanSelection && (
                     <div className="pt-20 flex flex-col h-full">
                       <div className="h-full space-y-7">
                         <h3 className="text-4xl font-semibold">Set your password</h3>
@@ -292,13 +310,6 @@ export default function Authentication({ onClose }) {
                       </div>
 
                       <div className="flex justify-end">
-                        {/* <button
-                        type="button"
-                        onClick={handlePrevStep}
-                        className="w-1/3 text-[1.7rem] font-semibold rounded-2xl h-[6rem] border-2 border-neutral-800 hover:scale-95 cursor-pointer"
-                      >
-                        Back
-                      </button> */}
                         <button
                           type="button"
                           onClick={handleNextStep}
@@ -326,6 +337,8 @@ export default function Authentication({ onClose }) {
                               key={idx}
                               name={`otp-${idx}`}
                               type="tel"
+                              autoComplete="one-time-code"
+                              autoFocus={idx === 0}
                               maxLength={1}
                               className="w-[5.5rem] p-5 text-[1.7rem] text-center font-medium rounded-2xl h-[5.5rem] border-[.25rem] border-neutral-800 focus:border-2"
                             />
@@ -346,7 +359,7 @@ export default function Authentication({ onClose }) {
                   )}
                 </div>
 
-                {signupStep !== 4 && (
+                {signupStep !== 4 && !showPlanSelection && (
                   <>
                     <hr className="w-full h-px bg-neutral-500 my-7" />
                     <p className="text-[1.7rem] normal-case">
@@ -362,8 +375,61 @@ export default function Authentication({ onClose }) {
           </div>
         </div>
 
-        <div className="absolute top-6 right-6" onClick={onClose}>
-          <TiTimes size={35} className="cursor-pointer" />
+        {/* Plan Selection */}
+        {showPlanSelection && (
+          <div className="absolute top-0 left-0 right-0 bottom-0 bg-white rounded-2xl p-10">
+            <div className="mb-3 flex justify-between w-full">
+              <h2 className="text-4xl font-semibold normal-case">Choose an option to continue</h2>
+              {/* <div className="w-fit" onClick={handleClosePlanSelection}>
+                <IoMdClose size={25} className="cursor-pointer" />
+              </div> */}
+            </div>
+            <div className="mx-auto">
+              <Swiper
+                spaceBetween={16}
+                slidesPerView={2}
+                breakpoints={{
+                  450: { slidesPerView: 1.3 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 },
+                }}
+                autoplay={{ delay: 2500, disableOnInteraction: false }}
+                modules={[Autoplay]}
+              >
+                {pricingPlans.map((plan, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div
+                      key={plan.id}
+                      className="border bg-gray-50 pb-8 rounded-xl p-8 hover:shadow-lg transition-shadow cursor-pointer"
+                      onClick={() => handlePlanSelect(plan)}
+                    >
+                      <h3 className={`text-3xl ${plan.color} w-fit text-white m-auto uppercase rounded-full py-2 px-6 font-medium text-center mb-7`}>
+                        {plan.name}
+                      </h3>
+                      <p className="text-6xl flex gap-1 items-start justify-center font-semibold text-center mb-3">
+                        <small className="text-xl">$</small>
+                        {plan.price}
+                      </p>
+                      <p className="text-gray-600 text-xl font-normal text-center mb-8">{plan.billing}</p>
+                      <ButtonOne name="select plan" className="w-full h-[5.5rem] md:h-[4.5rem] !shadow-none flex items-center" />
+                      <ul className="space-y-4 mt-10">
+                        {plan.features.map((feature, index) => (
+                          <li key={index} className="flex gap-4 items-start">
+                            <FaCheck className="text-xl" />
+                            <span className="text-2xl normal-case">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+
+        <div className="absolute top-4 right-8" onClick={onClose}>
+          <IoMdClose size={30} className="cursor-pointer" />
         </div>
       </div>
     </div>
